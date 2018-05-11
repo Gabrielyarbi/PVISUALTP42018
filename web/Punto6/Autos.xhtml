@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form id="mdf">
+           
+            <p:panel id="pnla" header="Tabla de autos">
+                <p:dataTable id="tablaAutos" value="#{autosForManagedBean.autos}" var="auto">
+                    <p:column headerText="ID" >
+                        <h:outputText value="#{auto.ID}"/>
+                    </p:column>
+                    <p:column headerText="Patente">
+                        <h:outputText value="#{auto.patente}"/>
+                    </p:column>
+                    <p:column headerText="Marca">
+                        <h:outputText value="#{auto.marca}"/>
+                    </p:column>
+                    <p:column headerText="Modelo">
+                        <h:outputText value="#{auto.modelo}"/>
+                    </p:column>
+                    <p:column headerText="Color">
+                        <h:outputText value="#{auto.color}"/>
+                    </p:column>
+                    <p:column headerText="Tipo Combustible">
+                        <h:outputText value="#{auto.tipoCombustible}"/>
+                    </p:column>
+                    <p:column headerText="Editar">
+                        <p:commandButton value="Editar" actionListener="#{autosForManagedBean.seleccionarAuto(auto)}" 
+                                         update="di" 
+                                         />
+                    </p:column>
+                </p:dataTable>    
+
+            </p:panel>
+
+        </h:form>
+        <h:form id="di">
+             <p:growl id="mensaje" />
+             <p:dialog header="dialogo" widgetVar="dlg" height="250" visible="#{autosForManagedBean.visible}">
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="ID"/>
+                    <p:inputNumber value="#{autosForManagedBean.autoseleccionado.ID}" disabled="true"/>
+                    <p:outputLabel value="Patente" for="txtpatente"/>
+                    <p:inputText id="txtpatente" value="#{autosForManagedBean.autoseleccionado.patente}" 
+                                 required="true"/>
+                    <p:outputLabel value="Marca" for="txtmarca"/>
+                    <p:inputText id="txtmarca" value="#{autosForManagedBean.autoseleccionado.marca}"
+                                 required="true" validatorMessage="Marca invalida">
+                        <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    </p:inputText>
+                    <p:outputLabel value="Modelo" for="txtmodelo"/>
+                    <p:inputText id="txtmodelo" value="#{autosForManagedBean.autoseleccionado.modelo}"
+                                 required="true" validatorMessage="Modelo invalido">
+                    <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    </p:inputText>
+                    <p:outputLabel value="color" for="txtcolor"/>
+                    <p:inputText id="txtcolor" value="#{autosForManagedBean.autoseleccionado.color}"
+                                 required="true" validatorMessage="Color invalido">
+                    <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    </p:inputText>
+                    <p:outputLabel value="Tipo de combustible" for="tpc"/>
+                    <p:inputText id="tpc" value="#{autosForManagedBean.autoseleccionado.tipoCombustible}" 
+                                 required="true" validatorMessage="Tipo no admitido">
+                    <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    </p:inputText>
+                    <p:commandButton value="Guardar cambios"  actionListener="#{autosForManagedBean.modificarAuto()}" update="mdf,di,mensaje"/>
+                    <p:commandButton value="cancelar" update="di"/>
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+

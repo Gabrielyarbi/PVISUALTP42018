@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Gestion de libros</title>
+    </h:head>
+    <h:body>
+        <h:form id="frmlibro"  >
+            <p:growl id="msj" />
+            <p:panel id="pnlregistro" header="Resgistro de libros" >
+                <h:panelGrid id="pnlibro" columns="2">
+                    <p:outputLabel id="lblisbn" value="ISBN" for="txtisbn"/>
+                    <p:inputNumber id="txtisbn" value="#{libroForManagedBean.libro.isbn}"
+                                   required="true" validatorMessage="Fuera de rango" decimalPlaces="0">
+                        <f:validateLongRange maximum="9999" minimum="1"/>
+                    </p:inputNumber>
+                    <p:outputLabel id="lbltitulo" value="Titulo" for="txttitulo"/>
+                    <p:inputText id="txttitulo" value="#{libroForManagedBean.libro.titulo}"
+                                 required="true" validatorMessage="Titulo invalido">
+                        <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    </p:inputText>
+                    <p:outputLabel id="lblautor" value="Autor" for="txtautor"/>
+                    <p:inputText id="txtautor" value="#{libroForManagedBean.libro.autor}"
+                                 required="true" validatorMessage="Autor invalido">
+                    <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    </p:inputText>
+                    <p:outputLabel id="lblprecio" value="Precio" for="txtprecio"/>
+                    <p:inputNumber id="txtprecio" value="#{libroForManagedBean.libro.precio}"
+                                   required="true" validatorMessage="Precio fuera de rango 100+">
+                     <f:validateLongRange maximum="1999" minimum="100"/>
+                    </p:inputNumber>
+                    <p:commandButton id="btnlibro" value="Agregar" actionListener="#{libroForManagedBean.agregarLibro()}" update="frmtablalibro,frmlibro,msj"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+        <h:form id="frmtablalibro">
+            <p:panel id="pnltablalibro" header="Libros">
+                <p:dataTable id="listalibros" value="#{libroForManagedBean.libros}" var="libro">
+                    <p:column headerText="ISBN">
+                        <h:outputText value="#{libro.isbn}"/>
+                    </p:column>
+                    <p:column headerText="Titulo">
+                        <h:outputText value="#{libro.titulo}"/>
+                    </p:column>
+                    <p:column headerText="Autor">
+                        <h:outputText value="#{libro.autor}"/>
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{libro.precio}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+
+        </h:form>
+    </h:body>
+</html>
+

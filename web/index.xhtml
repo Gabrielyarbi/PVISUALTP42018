@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Aplicacion resgistro de numeros</title>
+    </h:head>
+    <h:body>
+        <p:panel id="panelNum"  header="Ingreso de numeros">
+            <h:form id="formnum"  > 
+                <h:panelGrid id="pnlnum"  columns="4" >
+                    <p:outputLabel id="lblNum" value="Ingrese un numero"/>
+                    <p:inputNumber  id="txtNum" value="#{numerosForManagedBean.num.valor}" decimalPlaces="0" />
+                    <p:commandButton id="btnNum" value="Añadir"   actionListener="#{numerosForManagedBean.agregarNum()}" update="frmTabla"  />
+                    <p:outputLabel/>
+                    <p:commandButton id="btnmayor" value="Mayor" update="lblmayor"/>
+                    <p:outputLabel id="lblmayor" value="#{numerosForManagedBean.determinarMayor()}"/>
+                    <p:commandButton id="btnmenor" value="Menor" update="lblmenor"/>
+                    <p:outputLabel id="lblmenor" value="#{numerosForManagedBean.determinarMenor()}" />
+                    <p:commandButton id="btnpromedio" value="promedio" update="lblpromedio" />
+                    <p:outputLabel id="lblpromedio" value="#{numerosForManagedBean.determinarPromedio()}"/>
+                   
+                </h:panelGrid>
+            </h:form>
+            <h:form id="frmTabla">
+                <h:panelGrid id="pnlTabla" width="250">
+                <p:dataList id="ListNum" value="#{numerosForManagedBean.numeros}" var="Num" type="definition" >
+                    <f:facet name="header">
+                        Numeros
+                    </f:facet>
+                    #{Num.valor}
+                </p:dataList>
+                    </h:panelGrid>
+             
+            </h:form>
+            
+        </p:panel>
+    </h:body>
+</html>
+

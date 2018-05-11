@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>BUSQUEDA DE LIBROS</title>
+    </h:head>
+    <h:body>
+        <h:form id="frmlibr" >
+            <p:growl id="msjs" />
+            <h:panelGrid columns="2" >
+                <p:panel id="pnlregistro2" header="Resgistro de libros">
+                    <h:panelGrid id="pnlibro2" columns="2">
+                        <p:outputLabel id="lblisb" value="ISBN" for="txtisb"/>
+                        <p:inputNumber id="txtisb" value="#{busquedaLibrosForManagedBean.libro.isbn}"
+                                       required="true" validatorMessage="ISBN fuera de rango">
+                            <f:validateLongRange minimum="1" maximum="9999"/>
+                        </p:inputNumber>
+                        <p:outputLabel id="lbltitul" value="Titulo" for="txttitul"/>
+                        <p:inputText id="txttitul" value="#{busquedaLibrosForManagedBean.libro.titulo}" required="true"
+                                     validatorMessage="Titulo no valido">
+                            <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                        </p:inputText>
+                        <p:outputLabel id="lblauto" value="Autor" for="txtauto"/>
+                        <p:inputText id="txtauto" value="#{busquedaLibrosForManagedBean.libro.autor}" required="true"
+                                     validatorMessage="Autor invalido">
+                            <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                        </p:inputText>
+                        <p:outputLabel id="lblpreci" value="Precio" for="txtpreci"/>
+                        <p:inputNumber id="txtpreci" value="#{busquedaLibrosForManagedBean.libro.precio}"
+                                       required="true" validatorMessage="Precio fuera de rango">
+                            <f:validateLongRange minimum="100" maximum="1999"/>
+                        </p:inputNumber>
+                        <p:commandButton id="btnlibr" value="Agregar" actionListener="#{busquedaLibrosForManagedBean.agregarLibro()}" update="frmtablalibr,frmlibr,msjs"/>             
+                    </h:panelGrid>                                               
+                </p:panel>
+            </h:panelGrid>
+        </h:form>
+
+        <h:form>
+            <p:growl id="msjs2" />
+
+            <p:panel id="pnlbusqueda" header="Buacar por autor">
+                <h:panelGrid columns="3">
+                    <p:outputLabel id="lblpalabr" value="Ingrese nombre del autor" for="txtpalabra" />
+                    <p:inputText id="txtpalabra" value="#{busquedaLibrosForManagedBean.palabra}" 
+                                  validatorMessage="Busqueda invalida">
+                    <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    </p:inputText>
+                    <p:commandButton id="btnbuscar" value="Buscar" actionListener="#{busquedaLibrosForManagedBean.buscarLibro()}"  
+                                     update="frmdialog,dlg2"/>
+                </h:panelGrid>
+            </p:panel>
+
+
+        </h:form>
+
+        <h:form id="frmtablalibr">
+            <p:panel id="pnltablalibr" header="Libros">
+                <p:dataTable id="listalibro" value="#{busquedaLibrosForManagedBean.libros}" var="libro">
+                    <p:column headerText="ISBN">
+                        <h:outputText value="#{libro.isbn}"/>
+                    </p:column>
+                    <p:column headerText="Titulo">
+                        <h:outputText value="#{libro.titulo}"/>
+                    </p:column>
+                    <p:column headerText="Autor">
+                        <h:outputText value="#{libro.autor}"/>
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{libro.precio}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+        <h:form id="frmdialog">
+            <p:dialog id="dlg" widgetVar="di" height="200" visible="#{busquedaLibrosForManagedBean.dialogo}">
+                <p:dataTable value="#{busquedaLibrosForManagedBean.librosencontrados}" var="li">
+                    <p:column headerText="Autor">
+                        <h:outputText value="#{li.autor}"/>
+                    </p:column>
+                    <p:column headerText="Titulo">
+                        <h:outputText value="#{li.titulo}"/>
+                    </p:column>
+                    <p:column headerText="Precio">
+                        <h:outputText value="#{li.precio}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:dialog>
+        </h:form>
+        <h:form id="dlg2">
+            <p:dialog visible="#{busquedaLibrosForManagedBean.dialogo2}">
+                <p:outputLabel value="Sin resultados"/>
+            </p:dialog>
+        </h:form>
+    </h:body>
+    
+</html>
+

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Ahorcado</title>
+    </h:head>
+    <h:body> 
+        <h:panelGrid columns="2">
+            <h:form id="ahorcado">
+                <p:growl id="msj" />
+                <p:panel id="pnlahorcado" header="Ahorcado" >
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Ingrese letra" for="txtletra"/>
+                        <p:inputText id="txtletra" value="#{ahorcadoManagedBean.letra}" 
+                                     maxlength="1" required="true" validatorMessage="Debe ingresar una letra">
+                            <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                        </p:inputText>
+                        <p:commandButton value="Probar"  actionListener="#{ahorcadoManagedBean.comparar()}"  update="frma,pnli,msg,msj,ahorcado" />
+                    </h:panelGrid>
+                </p:panel>
+            </h:form>
+            <p:panel id="pnli" header="Informacion">
+                <h:panelGrid columns="2">
+
+                    <p:outputLabel value="Intentos :"/>
+                    <p:outputLabel value="#{ahorcadoManagedBean.intentos}"/>
+                    <p:outputLabel value="Primera Letra :"/>
+                    <p:outputLabel value="#{ahorcadoManagedBean.palabrainfo.primeraletra}"/>
+                    <p:outputLabel value="Cantidad de letras :"/>
+                    <p:outputLabel value="#{ahorcadoManagedBean.palabrainfo.longitud}"/>
+                    <p:outputLabel value="INGRESAR LAS LETRAS EN MAYUSCULAS "/>
+                </h:panelGrid>
+            </p:panel>
+            <h:form id="frma">  
+                <p:dataList value="#{ahorcadoManagedBean.palabraoculta}" var="l"  type="definition">
+                    #{l}
+
+                </p:dataList> 
+            </h:form>
+            <h:form id="msg">
+
+                <p:dialog widgetVar="dialog" visible="#{ahorcadoManagedBean.finjuego}">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="#{ahorcadoManagedBean.resultado.valor}"/>   
+                        <p:outputLabel/>
+                        <p:outputLabel value="La palabra era :"/>
+                        <p:outputLabel value="#{ahorcadoManagedBean.palabrainfo.valor}"/>
+                        <p:commandButton value="Jugar de nuevo" actionListener="#{ahorcadoManagedBean.inciarJuego()}" update="frma,pnli,msg,"/>
+                    </h:panelGrid>
+                </p:dialog>
+
+            </h:form>
+        </h:panelGrid>
+
+    </h:body>
+</html>
+

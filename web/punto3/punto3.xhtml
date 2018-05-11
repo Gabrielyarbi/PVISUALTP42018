@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Calculadora</title>
+    </h:head>
+    <h:body>
+        <p:growl id="msj" />
+        <h:panelGrid id="tmn" width="500"  border="5">
+            <p:panel id="pnl" header="Calculadora" >
+            <h:form id="frm">
+                <h:panelGrid id="pnlC" columns="3" >
+                <p:outputLabel id="lbloperacion" value="Elija una operacion"/>
+                <p:selectOneMenu id="lstoperaciones" value="#{calculadoraForBean.operacion}">
+                    <f:selectItems id="lista" value="#{calculadoraForBean.operaciones}"/>
+                </p:selectOneMenu>
+                <p:outputLabel/>
+               
+                <p:outputLabel id="valor1" value="Ingrese un valor" for="v1"/>
+                <p:outputLabel id="valor2" value="Ingrese otro valor" for="v2"/>
+               
+                <p:outputLabel/>
+                <p:inputNumber id="v1" value="#{calculadoraForBean.numero.valor1}" required="true" />
+                <p:inputNumber id="v2" value="#{calculadoraForBean.numero.valor2}" required="true" />
+                <p:commandButton id="btncalculadora" value="Calcular" update="txtres,msj"/>
+                <p:outputLabel id="lblres" value="Resultado"/>
+                <p:outputLabel id="txtres" value="#{calculadoraForBean.calcularNumeros()}"/>
+                
+            </h:panelGrid>
+            </h:form>
+        </p:panel>
+      </h:panelGrid>
+    </h:body>
+</html>
+

@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Conversion de temperaturas</title>
+    </h:head>
+    <h:body>
+
+
+        <h:form id="frmtemp" >
+            <p:growl id="msjs" />
+            <p:panel header="Calculo de temperaturas">
+
+
+                <h:panelGrid id="pnlH" columns="3"  >
+                    <p:outputLabel  value="Ingrese temperatura" for="txtTemp"/> 
+                    <p:inputNumber id="txtTemp" value="#{temperaturaForManagedBean.temperatura.valor}" 
+                                   required="true" />
+                    <p:selectOneMenu id="List" value="#{temperaturaForManagedBean.origen}"> 
+                        <f:selectItems value="#{temperaturaForManagedBean.tipotemp}"/>
+                    </p:selectOneMenu> 
+                    <p:outputLabel id="lblresultado" value="Resultado"/>
+                    <p:outputLabel id="lblConversion"  value="#{temperaturaForManagedBean.convertirA()}"/>
+                    <p:selectOneMenu id="List2" value="#{temperaturaForManagedBean.destino}"> 
+                        <f:selectItems value="#{temperaturaForManagedBean.tipotemp}"/>
+
+                    </p:selectOneMenu>
+                    <p:commandButton value="Calcular" actionListener="#{profesoForManagedBean.seleccionarProfe(profe)}"   update="lblConversion,msjs"/>
+                </h:panelGrid>
+            </p:panel>
+        </h:form>
+
+
+    </h:body>
+</html>
+

@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+
+        <h:panelGrid id="pn"  width="900" columns="1" >
+            <h:form>
+                <p:growl id="mensajes" showDetail="true" sticky="true"/>
+                <p:panel id="pnlp" header="Regitro de profesor"  >
+                    <h:panelGrid id="pnlclumn" columns="2">
+                        <p:outputLabel id="lbllegajo" value="Legajo" for="txtlegajo"/>
+                        <p:inputNumber id="txtlegajo" value="#{profesoForManagedBean.profesor.legajo}" decimalPlaces="0" 
+                                       required="true" requiredMessage="Legajo obligatorio" validatorMessage="El legajo fuera de rango permititdo 1-999">
+                            <f:validateLongRange minimum="1" maximum="999"/>
+                        </p:inputNumber>
+                        <p:outputLabel id="lblapellido" value="Apellido" for="txtlapellido"/>
+                        <p:inputText id="txtlapellido" value="#{profesoForManagedBean.profesor.apellido}"  
+                                     required="true" requiredMessage="Apellido obligatorio"  validatorMessage="Apellido invalido">
+                            <f:validateRegex pattern="^[a-zA-Z]+$" />
+                        </p:inputText>               
+                        <p:outputLabel id="lblnombre" value="Nombre" for="txtnombre"/>
+                        <p:inputText id="txtnombre" value="#{profesoForManagedBean.profesor.nombre}"
+                                     required="true" requiredMessage="Nombre obligatorio" validatorMessage="Nombre invalido">
+                            <f:validateRegex pattern="^[a-zA-Z]+$" />
+                        </p:inputText>
+                        <p:outputLabel id="lblmateria" value="Materia" for="txtmateria"/>
+                        <p:inputText id="txtmateria" value="#{profesoForManagedBean.profesor.materia}" 
+                                     required="true" requiredMessage="Materia obligatoria" validatorMessage="Patron invalido">
+                            <f:validateRegex pattern="^[a-zA-Z]+$" />
+                        </p:inputText>
+                        <p:outputLabel id="lbledad" value="Edad" for="txtedad"/>
+                        <p:inputNumber id="txtedad" value="#{profesoForManagedBean.profesor.edad}" decimalPlaces="0" 
+                                       required="true" requiredMessage="Edad obligatoria" validatorMessage="Edad invalida">
+                            <f:validateLongRange minimum="20" maximum="70"/>
+                        </p:inputNumber>
+                        <p:outputLabel id="lblcorreo" value="Correo" for="txtcorreo"/>
+                        <p:inputText id="txtcorreo" value="#{profesoForManagedBean.profesor.correo}"  placeholder="usuario@gmail.com.ar" 
+                                     required="true" requiredMessage="Correo obligatorio" validatorMessage="Correo invalido">
+                            <f:validateRegex  pattern="[a-zA-Z]+@[a-z]+.com" />
+                        </p:inputText>
+                        <p:commandButton id="btnprofe" value="Registrar" actionListener="#{profesoForManagedBean.agregarProfesores()}" update="frmprofe,pnlp,mensajes" />
+
+                    </h:panelGrid>
+                </p:panel>
+
+            </h:form>    
+            <h:form id="frmprofe">
+                <p:dataTable id="tablaprofes" var="profe" value="#{profesoForManagedBean.profesores}">
+
+
+                    <p:column headerText="Legajo" >
+                        <h:outputText value="#{profe.legajo}"/>
+                    </p:column>
+
+                    <p:column headerText="Apellido" >
+                        <h:outputText value="#{profe.apellido}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombre" >
+                        <h:outputText value="#{profe.nombre}"/>
+                    </p:column>
+
+                    <p:column headerText="Materia" >
+                        <h:outputText value="#{profe.materia}"/>
+                    </p:column>
+
+                    <p:column headerText="Edad" >
+                        <h:outputText value="#{profe.edad}"/>
+                    </p:column>
+                    <p:column headerText="Correo" >
+                        <h:outputText value="#{profe.correo}"/>
+                    </p:column>
+                    <p:column headerText="Mostrar">
+                        <p:commandButton  value="Mostrar"  actionListener="#{profesoForManagedBean.seleccionarProfe(profe)}" oncomplete="PF('dialogo').show();" update="frmdialogo"/>
+                    </p:column>
+
+                </p:dataTable>
+
+            </h:form>
+        </h:panelGrid>
+        <h:form id="frmdialogo">
+            <p:dialog header="dialog" widgetVar="dialogo"  height="150"  >
+                <h:panelGrid columns="2">
+                    <p:outputLabel value="Legajo :"/>
+                    <p:outputLabel value="#{profesoForManagedBean.profesorSeleccionado.legajo}"/>
+                    <p:outputLabel value="Apellido :"/>
+                    <p:outputLabel value="#{profesoForManagedBean.profesorSeleccionado.apellido}"/>
+                    <p:outputLabel value="Nombre :"/>
+                    <p:outputLabel value="#{profesoForManagedBean.profesorSeleccionado.nombre}"/>
+                    <p:outputLabel value="Materia :"/>
+                    <p:outputLabel value="#{profesoForManagedBean.profesorSeleccionado.materia}"/>
+                    <p:outputLabel value="Edad :"/>
+                    <p:outputLabel value="#{profesoForManagedBean.profesorSeleccionado.edad}"/>
+                    <p:outputLabel value="Correo :"/>
+                    <p:outputLabel value="#{profesoForManagedBean.profesorSeleccionado.correo}"/>
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</html>
+
