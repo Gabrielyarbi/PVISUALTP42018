@@ -21,10 +21,10 @@ import punto2.aplicacion.dominio.Numero;
 public class NumerosForManagedBean implements Serializable {
 
     private List<Numero> numeros;
-    private Numero Num;
+    private Numero num;
 
     public NumerosForManagedBean() {
-        Num = new Numero();
+        num = new Numero();
         numeros = new ArrayList<>();
 
     }
@@ -38,17 +38,19 @@ public class NumerosForManagedBean implements Serializable {
     }
 
     public Numero getNum() {
-        return Num;
+        return num;
     }
 
-    public void setNum(Numero Num) {
-        this.Num = Num;
+    public void setNum(Numero num) {
+        this.num = num;
     }
+
+    
 
     public void agregarNum() {
 
-        this.numeros.add(Num);
-        Num = new Numero();
+        this.numeros.add(num);
+        num = new Numero();
         
 
     }
@@ -56,11 +58,11 @@ public class NumerosForManagedBean implements Serializable {
     public int determinarMayor() {
         int mayor;
         mayor = 0;
-        for (Numero num : this.getNumeros()) {
-            if (mayor > num.getValor()) {
+        for (Numero n : this.getNumeros()) {
+            if (mayor > n.getValor()) {
                 mayor = mayor;
             } else {
-                mayor = num.getValor();
+                mayor = n.getValor();
             }
 
         }
@@ -71,11 +73,11 @@ public class NumerosForManagedBean implements Serializable {
 
         int menor;
         menor = 9999999;
-        for (Numero num : this.getNumeros()) {
-            if (menor < num.getValor()) {
+        for (Numero n : this.getNumeros()) {
+            if (menor < n.getValor()) {
                 menor = menor;
             } else {
-                menor = num.getValor();
+                menor = n.getValor();
             }
 
         }
