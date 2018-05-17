@@ -52,12 +52,12 @@
                     <p:outputLabel value="Marca" for="txtmarca"/>
                     <p:inputText id="txtmarca" value="#{autosForManagedBean.autoseleccionado.marca}"
                                  required="true" validatorMessage="Marca invalida">
-                        <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                        <f:validateRegex pattern="^[a-zA-Z ]+$"/>
                     </p:inputText>
                     <p:outputLabel value="Modelo" for="txtmodelo"/>
                     <p:inputText id="txtmodelo" value="#{autosForManagedBean.autoseleccionado.modelo}"
                                  required="true" validatorMessage="Modelo invalido">
-                    <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
                     </p:inputText>
                     <p:outputLabel value="color" for="txtcolor"/>
                     <p:inputText id="txtcolor" value="#{autosForManagedBean.autoseleccionado.color}"
@@ -67,7 +67,7 @@
                     <p:outputLabel value="Tipo de combustible" for="tpc"/>
                     <p:inputText id="tpc" value="#{autosForManagedBean.autoseleccionado.tipoCombustible}" 
                                  required="true" validatorMessage="Tipo no admitido">
-                    <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    <f:validateRegex pattern="^[a-zA-Z ]+$"/>
                     </p:inputText>
                     <p:commandButton value="Guardar cambios"  actionListener="#{autosForManagedBean.modificarAuto()}" update="mdf,di,mensaje"/>
                     <p:commandButton value="cancelar" update="di"/>

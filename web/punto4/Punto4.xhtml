@@ -15,8 +15,8 @@
                     <h:panelGrid columns="2">
                         <p:outputLabel value="Ingrese letra" for="txtletra"/>
                         <p:inputText id="txtletra" value="#{ahorcadoManagedBean.letra}" 
-                                     maxlength="1" required="true" validatorMessage="Debe ingresar una letra">
-                            <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                                     maxlength="1" required="true" validatorMessage="Debe ingresar una letra mayuscula">
+                            <f:validateRegex pattern="^[A-Z]+$"/>
                         </p:inputText>
                         <p:commandButton value="Probar"  actionListener="#{ahorcadoManagedBean.comparar()}"  update="frma,pnli,msg,msj,ahorcado" />
                     </h:panelGrid>

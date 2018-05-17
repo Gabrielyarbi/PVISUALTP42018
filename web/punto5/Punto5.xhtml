@@ -22,17 +22,17 @@
                         <p:outputLabel id="lblapellido" value="Apellido" for="txtlapellido"/>
                         <p:inputText id="txtlapellido" value="#{profesoForManagedBean.profesor.apellido}"  
                                      required="true" requiredMessage="Apellido obligatorio"  validatorMessage="Apellido invalido">
-                            <f:validateRegex pattern="^[a-zA-Z]+$" />
+                            <f:validateRegex pattern="^[a-zA-Z ]+$" />
                         </p:inputText>               
                         <p:outputLabel id="lblnombre" value="Nombre" for="txtnombre"/>
                         <p:inputText id="txtnombre" value="#{profesoForManagedBean.profesor.nombre}"
                                      required="true" requiredMessage="Nombre obligatorio" validatorMessage="Nombre invalido">
-                            <f:validateRegex pattern="^[a-zA-Z]+$" />
+                            <f:validateRegex pattern="^[a-zA-Z ]+$" />
                         </p:inputText>
                         <p:outputLabel id="lblmateria" value="Materia" for="txtmateria"/>
                         <p:inputText id="txtmateria" value="#{profesoForManagedBean.profesor.materia}" 
                                      required="true" requiredMessage="Materia obligatoria" validatorMessage="Patron invalido">
-                            <f:validateRegex pattern="^[a-zA-Z]+$" />
+                            <f:validateRegex pattern="^[a-zA-Z ]+$" />
                         </p:inputText>
                         <p:outputLabel id="lbledad" value="Edad" for="txtedad"/>
                         <p:inputNumber id="txtedad" value="#{profesoForManagedBean.profesor.edad}" decimalPlaces="0" 
@@ -42,7 +42,7 @@
                         <p:outputLabel id="lblcorreo" value="Correo" for="txtcorreo"/>
                         <p:inputText id="txtcorreo" value="#{profesoForManagedBean.profesor.correo}"  placeholder="usuario@gmail.com.ar" 
                                      required="true" requiredMessage="Correo obligatorio" validatorMessage="Correo invalido">
-                            <f:validateRegex  pattern="[a-zA-Z]+@[a-z]+.com" />
+                            <f:validateRegex  pattern="[a-zA-Z0-9 ]+@[a-zA-Z]+.com" />
                         </p:inputText>
                         <p:commandButton id="btnprofe" value="Registrar" actionListener="#{profesoForManagedBean.agregarProfesores()}" update="frmprofe,pnlp,mensajes" />
 

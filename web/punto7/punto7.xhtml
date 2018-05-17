@@ -20,16 +20,16 @@
                     <p:outputLabel id="lbltitulo" value="Titulo" for="txttitulo"/>
                     <p:inputText id="txttitulo" value="#{libroForManagedBean.libro.titulo}"
                                  required="true" validatorMessage="Titulo invalido">
-                        <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                        <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
                     </p:inputText>
                     <p:outputLabel id="lblautor" value="Autor" for="txtautor"/>
                     <p:inputText id="txtautor" value="#{libroForManagedBean.libro.autor}"
                                  required="true" validatorMessage="Autor invalido">
-                    <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                    <f:validateRegex pattern="^[a-zA-Z ]+$"/>
                     </p:inputText>
                     <p:outputLabel id="lblprecio" value="Precio" for="txtprecio"/>
                     <p:inputNumber id="txtprecio" value="#{libroForManagedBean.libro.precio}"
-                                   required="true" validatorMessage="Precio fuera de rango 100+">
+                                   required="true" validatorMessage="Precio fuera de rango 100+" symbol="$">
                      <f:validateLongRange maximum="1999" minimum="100"/>
                     </p:inputNumber>
                     <p:commandButton id="btnlibro" value="Agregar" actionListener="#{libroForManagedBean.agregarLibro()}" update="frmtablalibro,frmlibro,msj"/>

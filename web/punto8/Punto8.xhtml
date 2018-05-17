@@ -21,16 +21,16 @@
                         <p:outputLabel id="lbltitul" value="Titulo" for="txttitul"/>
                         <p:inputText id="txttitul" value="#{busquedaLibrosForManagedBean.libro.titulo}" required="true"
                                      validatorMessage="Titulo no valido">
-                            <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                            <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
                         </p:inputText>
                         <p:outputLabel id="lblauto" value="Autor" for="txtauto"/>
                         <p:inputText id="txtauto" value="#{busquedaLibrosForManagedBean.libro.autor}" required="true"
                                      validatorMessage="Autor invalido">
-                            <f:validateRegex pattern="^[a-zA-Z]+$"/>
+                            <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
                         </p:inputText>
                         <p:outputLabel id="lblpreci" value="Precio" for="txtpreci"/>
                         <p:inputNumber id="txtpreci" value="#{busquedaLibrosForManagedBean.libro.precio}"
-                                       required="true" validatorMessage="Precio fuera de rango">
+                                       required="true" validatorMessage="Precio fuera de rango" symbol="$">
                             <f:validateLongRange minimum="100" maximum="1999"/>
                         </p:inputNumber>
                         <p:commandButton id="btnlibr" value="Agregar" actionListener="#{busquedaLibrosForManagedBean.agregarLibro()}" update="frmtablalibr,frmlibr,msjs"/>             
