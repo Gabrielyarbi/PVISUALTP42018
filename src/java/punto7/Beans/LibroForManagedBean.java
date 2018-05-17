@@ -58,27 +58,22 @@ private List<Libro>libros;
     }
 
    public void agregarLibro(){
-       int mayor;
-       mayor=0;
-       for (Libro a :this.libros){
-       if (mayor<a.getIsbn()){
-       mayor=a.getIsbn();
-       }
-       }
+      int acum=0;
        for (Libro a :this.libros){
        if(this.libro.getIsbn()==a.getIsbn()){
-       this.libro.setIsbn(mayor+1);
-       mostrarMensaje();
+     acum++;
+       
        }
        }
+       if (acum==0){
    this.libros.add(libro);
    libro=new Libro();
-   
+       }else{mostrarMensaje();}
    } 
 public void mostrarMensaje(){
         
         FacesContext context = FacesContext.getCurrentInstance();
-      context.addMessage(null, new FacesMessage("Se modifico la isbn por que estaba repetida"));
+      context.addMessage(null, new FacesMessage("Libro ya existe "));
 }
 
 }

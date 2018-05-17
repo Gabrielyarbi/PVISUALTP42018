@@ -8,8 +8,10 @@ package punto8.Beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import punto7.aplicacion.dominio.Libro;
 
@@ -98,9 +100,18 @@ public class BusquedaLibrosForManagedBean implements Serializable {
     }
 
     public void agregarLibro() {
+        int repite=0;
+        for (Libro a:this.libros){
+        if(this.libro.getIsbn()==a.getIsbn()){
+            repite++;}
+        }
+        if(repite==0){
         this.libros.add(libro);
         libro = new Libro();
-    }
+        }else{mostrarMensaje();
+        
+        }
+        }
 
     public void buscarLibro() {
         int t;
@@ -131,5 +142,9 @@ public class BusquedaLibrosForManagedBean implements Serializable {
 
         this.dialogo = true;
     }
-
+public void mostrarMensaje(){
+        
+        FacesContext context = FacesContext.getCurrentInstance();
+      context.addMessage(null, new FacesMessage("Libro ya existe "));
+}
 }
