@@ -5,13 +5,16 @@
  */
 package punto7.aplicacion.dominio;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Gabriel
  */
-public class Libro {
+public class Libro implements Serializable{
     private int isbn,precio;
-    private String titulo,autor;
+    private String titulo;
+    private Autor autor;
 
     public int getIsbn() {
         return isbn;
@@ -37,20 +40,22 @@ public class Libro {
         this.titulo = titulo;
     }
 
-    public String getAutor() {
+    public Autor getAutor() {
         return autor;
     }
 
-    public void setAutor(String autor) {
+    public void setAutor(Autor autor) {
         this.autor = autor;
     }
 
-    public Libro(int isbn, int precio, String titulo, String autor) {
+    public Libro(int isbn, int precio, String titulo, Autor autor) {
         this.isbn = isbn;
         this.precio = precio;
         this.titulo = titulo;
         this.autor = autor;
     }
+
+  
 
     public Libro() {
     }

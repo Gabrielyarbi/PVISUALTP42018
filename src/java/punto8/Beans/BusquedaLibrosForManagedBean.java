@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import punto7.aplicacion.dominio.Autor;
 
 import punto7.aplicacion.dominio.Libro;
 
@@ -25,8 +26,10 @@ public class BusquedaLibrosForManagedBean implements Serializable {
 
     private Libro libro;
     private List<Libro> libros;
+    private Autor autor;
     String palabra;
     private List<Libro> librosencontrados;
+    private List<Autor>autores;
     private boolean dialogo;
     private boolean dialogo2;
 
@@ -34,18 +37,25 @@ public class BusquedaLibrosForManagedBean implements Serializable {
      * Creates a new instance of BusquedaLibrosForManagedBean
      */
     public BusquedaLibrosForManagedBean() {
-        libros = new ArrayList<>();
-        libro = new Libro(1, 500, "Codigo limpio", "Martin robert");
+       libros=new ArrayList<>();
+        autores=new ArrayList<>();
+        libro=new Libro(1, 500, "Codigo limpio", new Autor("Martin", "Robert"));
+        autores.add(libro.getAutor());
         libros.add(libro);
-        libro = new Libro(2, 300, "No me hagas pensar", "Krug Steve");
+        libro=new Libro(2, 300, "No me hagas pensar", new Autor("Steve", "Krug"));
+        autores.add(libro.getAutor());
         libros.add(libro);
-        libro = new Libro(3, 350, "El libro negro del programador", "Gomes Rafael");
+        libro=new Libro(3, 350, "El libro negro del programador", new Autor("Rafael", "Gomes"));
+        autores.add(libro.getAutor());
+        libros.add(libro);  
+        libro=new Libro(4, 800, "Romeo y Julieta", new Autor("William", "Sheakespeare"));
+        autores.add(libro.getAutor());
+        libros.add(libro);  
+        libro=new Libro(5, 700, "Los hombres que no amaban a las mujeres", new Autor("Larsson", "Stieg"));
+        autores.add(libro.getAutor());
         libros.add(libro);
-        libro = new Libro(4, 800, "Romeo y Julieta", "Sheakespeare William");
-        libros.add(libro);
-        libro = new Libro(5, 700, "Los hombres que no amaban a las mujeres", "Larsson Stieg");
-        libros.add(libro);
-        libro = new Libro();
+        libro=new Libro();
+    autor=new Autor();
         palabra = new String();
         dialogo = false;
         dialogo2 = false;
@@ -57,6 +67,14 @@ public class BusquedaLibrosForManagedBean implements Serializable {
 
     public void setLibro(Libro libro) {
         this.libro = libro;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
     }
 
     public List<Libro> getLibros() {
@@ -83,6 +101,14 @@ public class BusquedaLibrosForManagedBean implements Serializable {
         this.librosencontrados = librosencontrados;
     }
 
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
+    }
+
     public boolean isDialogo() {
         return dialogo;
     }
@@ -106,6 +132,7 @@ public class BusquedaLibrosForManagedBean implements Serializable {
             repite++;}
         }
         if(repite==0){
+            this.libro.setAutor(autor);
         this.libros.add(libro);
         libro = new Libro();
         }else{mostrarMensaje();
@@ -120,11 +147,12 @@ public class BusquedaLibrosForManagedBean implements Serializable {
             librosencontrados = new ArrayList<>();
             for (Libro a : this.libros) {
 
-                if (a.getAutor().toUpperCase().contains(this.palabra.toUpperCase())) {
+                if (a.getAutor().getApellido().toUpperCase().contains(this.palabra.toUpperCase())||a.getAutor().getNombre().toUpperCase().contains(this.palabra.toUpperCase())) {
                     this.librosencontrados.add(a);
                     mostrarDialogo();
                     t = t + 1;
                 }
+            
             }
 
             palabra = new String();
@@ -133,14 +161,15 @@ public class BusquedaLibrosForManagedBean implements Serializable {
             this.dialogo = false;
             this.dialogo2 = true;
         }
-        if (t != 0) {
-            this.dialogo2 = false;
+        if (t == 0) {
+            this.dialogo2 = true;
         }
     }
 
     public void mostrarDialogo() {
 
         this.dialogo = true;
+        this.dialogo2=false;
     }
 public void mostrarMensaje(){
         

@@ -23,11 +23,11 @@
                                      validatorMessage="Titulo no valido">
                             <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
                         </p:inputText>
-                        <p:outputLabel id="lblauto" value="Autor" for="txtauto"/>
-                        <p:inputText id="txtauto" value="#{busquedaLibrosForManagedBean.libro.autor}" required="true"
-                                     validatorMessage="Autor invalido">
-                            <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
-                        </p:inputText>
+                        <p:outputLabel id="lblauto" value="Autor" />
+                        <p:selectOneMenu value="#{busquedaLibrosForManagedBean.autor}" converter="omnifaces.SelectItemsConverter">
+                            <f:selectItems value="#{busquedaLibrosForManagedBean.autores}" 
+                                       var="pr" itemLabel="#{pr.nombre} #{pr.apellido}" itemValue="#{pr}"/>
+                    </p:selectOneMenu>
                         <p:outputLabel id="lblpreci" value="Precio" for="txtpreci"/>
                         <p:inputNumber id="txtpreci" value="#{busquedaLibrosForManagedBean.libro.precio}"
                                        required="true" validatorMessage="Precio fuera de rango" symbol="$">
@@ -68,7 +68,7 @@
                         <h:outputText value="#{libro.titulo}"/>
                     </p:column>
                     <p:column headerText="Autor">
-                        <h:outputText value="#{libro.autor}"/>
+                        <h:outputText value="#{libro.autor.nombre} #{libro.autor.apellido}"/>
                     </p:column>
                     <p:column headerText="Precio">
                         <h:outputText value="#{libro.precio}">
@@ -82,7 +82,7 @@
             <p:dialog id="dlg" widgetVar="di" height="200" visible="#{busquedaLibrosForManagedBean.dialogo}">
                 <p:dataTable value="#{busquedaLibrosForManagedBean.librosencontrados}" var="li">
                     <p:column headerText="Autor">
-                        <h:outputText value="#{li.autor}"/>
+                        <h:outputText value="#{li.autor.nombre} #{li.autor.apellido}"/>
                     </p:column>
                     <p:column headerText="Titulo">
                         <h:outputText value="#{li.titulo}"/>

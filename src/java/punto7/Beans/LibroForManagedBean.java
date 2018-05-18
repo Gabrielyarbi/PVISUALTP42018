@@ -5,12 +5,14 @@
  */
 package punto7.Beans;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import punto7.aplicacion.dominio.Autor;
 import punto7.aplicacion.dominio.Libro;
 
 /**
@@ -19,26 +21,50 @@ import punto7.aplicacion.dominio.Libro;
  */
 @ManagedBean
 @ViewScoped
-public class LibroForManagedBean {
+public class LibroForManagedBean implements Serializable{
 private Libro libro;
 private List<Libro>libros;
-
+private List<Autor>autores;
+private Autor autor;
     /**
      * Creates a new instance of LibroForManagedBean
      */
     public LibroForManagedBean() {
         libros=new ArrayList<>();
-        libro=new Libro(1, 500, "Codigo limpio", "Martin robert");
+        autores=new ArrayList<>();
+        libro=new Libro(1, 500, "Codigo limpio", new Autor("Martin", "Robert"));
+        autores.add(libro.getAutor());
         libros.add(libro);
-        libro=new Libro(2, 300, "No me hagas pensar", "Krug Steve");
+        libro=new Libro(2, 300, "No me hagas pensar", new Autor("Steve", "Krug"));
+        autores.add(libro.getAutor());
         libros.add(libro);
-        libro=new Libro(3, 350, "El libro negro del programador", "Gomes Rafael");
+        libro=new Libro(3, 350, "El libro negro del programador", new Autor("Rafael", "Gomes"));
+        autores.add(libro.getAutor());
         libros.add(libro);  
-        libro=new Libro(4, 800, "Romeo y Julieta", "Sheakespeare William");
+        libro=new Libro(4, 800, "Romeo y Julieta", new Autor("William", "Sheakespeare"));
+        autores.add(libro.getAutor());
         libros.add(libro);  
-        libro=new Libro(5, 700, "Los hombres que no amaban a las mujeres", "Larsson Stieg");
+        libro=new Libro(5, 700, "Los hombres que no amaban a las mujeres", new Autor("Larsson", "Stieg"));
+        autores.add(libro.getAutor());
         libros.add(libro);
         libro=new Libro();
+    autor=new Autor();
+    }
+
+    public List<Autor> getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<Autor> autores) {
+        this.autores = autores;
+    }
+
+    public Autor getAutor() {
+        return autor;
+    }
+
+    public void setAutor(Autor autor) {
+        this.autor = autor;
     }
 
     public Libro getLibro() {
@@ -66,6 +92,7 @@ private List<Libro>libros;
        }
        }
        if (acum==0){
+           this.libro.setAutor(autor);
    this.libros.add(libro);
    libro=new Libro();
        }else{mostrarMensaje();}

@@ -22,11 +22,12 @@
                                  required="true" validatorMessage="Titulo invalido">
                         <f:validateRegex pattern="^[a-zA-Z0-9 ]+$"/>
                     </p:inputText>
-                    <p:outputLabel id="lblautor" value="Autor" for="txtautor"/>
-                    <p:inputText id="txtautor" value="#{libroForManagedBean.libro.autor}"
-                                 required="true" validatorMessage="Autor invalido">
-                    <f:validateRegex pattern="^[a-zA-Z ]+$"/>
-                    </p:inputText>
+                    <p:outputLabel id="lblautor" value="Autor" />
+                    <p:selectOneMenu value="#{libroForManagedBean.autor}" converter="omnifaces.SelectItemsConverter">
+                        <f:selectItems value="#{libroForManagedBean.autores}" 
+                                       var="pr" itemLabel="#{pr.nombre} #{pr.apellido}" itemValue="#{pr}"/>
+                    </p:selectOneMenu>
+                    
                     <p:outputLabel id="lblprecio" value="Precio" for="txtprecio"/>
                     <p:inputNumber id="txtprecio" value="#{libroForManagedBean.libro.precio}"
                                    required="true" validatorMessage="Precio fuera de rango 100+" symbol="$">
@@ -46,7 +47,7 @@
                         <h:outputText value="#{libro.titulo}"/>
                     </p:column>
                     <p:column headerText="Autor">
-                        <h:outputText value="#{libro.autor}"/>
+                        <h:outputText value="#{libro.autor.nombre} #{libro.autor.apellido}"/>
                     </p:column>
                     <p:column headerText="Precio">
                         <h:outputText value="#{libro.precio}">
